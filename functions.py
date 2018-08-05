@@ -1,5 +1,4 @@
 # defining a function by naming it hello then giving it a parameter called name with a defualt value of Person
-
 def hello(name="Person"):
     print("hello", name)
 
