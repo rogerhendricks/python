@@ -33,17 +33,26 @@ editMenu.add_command(label="Redo", command=doNothing)
 #***** Toolbar *****
 toolbar = Frame(mainWindow, bg="blue")
 
-insert = Button(toolbar, text="Insert Text", command=doNothing)
-insert.pack(side=LEFT, padx=2, pady=2)
+insert = Button(toolbar, text="Insert Iext", command=doNothing)
+insert.grid(side=LEFT, padx=2, pady=2)
 
 undo = Button(toolbar, text="Undo", command=doNothing)
-undo.pack(side=LEFT, padx=2, pady=2)
+undo.pack(row=0, column=0, padx=2, pady=2)
 
 toolbar.pack(side=TOP, fill=X)
 
-#***** Status bar *****
+# create the widgets
+label_1 = Label(mainWindow, text="Name")
+label_2 = Label(mainWindow, text="Password")
+entry_1 = Entry(mainWindow)
+entry_2 = Entry(mainWindow)
+checkBox_1 = Checkbutton(mainWindow, text="Keep me logged in.")
 
-status =Label(mainWindow, text="Perparing to do nothing...", bd=1, relief=SUNKEN, anchor=W)
-status.pack(side=BOTTOM, fill=X)
+# Place the widget
+label_1.grid(row=1, column=0, sticky=E)
+label_2.grid(row=2, column=0, sticky=E)
+entry_1.grid(row=1, column=1)
+entry_2.grid(row=2, column=1)
+checkBox_1.grid(columnspan=2)
 
 mainWindow.mainloop()
