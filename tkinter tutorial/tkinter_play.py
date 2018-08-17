@@ -34,12 +34,12 @@ editMenu.add_command(label="Redo", command=doNothing)
 toolbar = Frame(mainWindow, bg="blue")
 
 insert = Button(toolbar, text="Insert Iext", command=doNothing)
-insert.grid(side=LEFT, padx=2, pady=2)
+insert.grid(row=0, column=0, padx=2, pady=2)
 
 undo = Button(toolbar, text="Undo", command=doNothing)
-undo.pack(row=0, column=0, padx=2, pady=2)
+undo.grid(row=0, column=1, padx=2, pady=2)
 
-toolbar.pack(side=TOP, fill=X)
+toolbar.grid(side=TOP, fill=X)
 
 # create the widgets
 label_1 = Label(mainWindow, text="Name")
