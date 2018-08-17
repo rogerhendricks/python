@@ -13,6 +13,14 @@ def click(key):
     #pressing C key means clear screen:
     elif key == "C":
         display.delete(0, END)
+    elif key == const_list[0]:
+        display.insert(END, "3.141592654")
+    elif key == const_list[1]:
+        display.insert(END, "299792458")
+    elif key == const_list[2]:
+        display.insert(END, "343")
+    elif key == const_list[3]:
+        display.insert(END, "150000000000")
     # add other key pressed values to end of current entry:
     else:
         display.insert(END, key)
@@ -89,6 +97,22 @@ for btn_text in const_list:
     def cmd(x=btn_text):
         click(x)
     Button(constants, text=btn_text, width=16, command=cmd).grid(row=r, column=c)
+    r = r+1
+# create function buttons
+functions = Frame(window)
+functions.grid(row=3, column=1, sticky=E)
+
+functions_list = [
+    'factorial (!)',
+    '-> roman',
+    '-> binary',
+    'binary -> 10'
+]
+
+for b in functions_list:
+    def cmd(x=b):
+        click(x)
+    Button(functions, text=b, width=11, command=cmd).grid(row=r, column=c)
     r = r+1
 
 ### Run mainloop
