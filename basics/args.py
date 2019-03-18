@@ -14,5 +14,4 @@ def print_args_kwargs(*args, **kwargs):
     print(args)
     print(kwargs)
 
-print_args_kwargs(1, 2, 3, name="roger")
-
+print_args_kwargs(1, 2, 3, name="bob")
