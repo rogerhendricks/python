@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 class mammal(object):
 	def legs(self):
 		pass
@@ -9,11 +11,15 @@ class mammal(object):
 
 class human(mammal):
 	def legs(self):
-		print(2)
+		legs = 2
+		limbs = 2 * int(legs)
+		return legs, limbs
 	def talk(self):
-		print("English")
+		talk = "English"
+		return talk
 	def eat(self):
-		print("Hamburger's!")
+		eat = "Hamburgers"
+		return eat
 
 
 class cat(mammal):
@@ -39,18 +45,19 @@ class dog(mammal):
 name = input("What is your name?")
 animalType = input("what type of animal? Human? Cat or dog?")
 
-if animalType == "human" or animalType == "Human":
+if animalType.lower() == "human":
 	animalType = human()
-	animalType.talk()
-	animalType.legs()
-	animalType.eat()
-elif animalType == "cat" or animalType == "Cat":
+	talk = animalType.talk().lower()
+	legs = animalType.legs()
+	eat = animalType.eat()
+	print(f"You have {legs[0]} legs and {legs[1]} limbs, speak {talk} and you love {eat}.")
+elif animalType.lower() == "cat":
 	animalType = cat()
 	animalType.talk()
 	animalType.legs()
 	animalType.eat()
 	animalType.whiskers()
-elif animalType == "dog" or animalType == "Dog":
+elif animalType.lower() == "dog":
 	animalType = dog()
 	animalType.talk()
 	animalType.legs()

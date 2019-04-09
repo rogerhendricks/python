@@ -3,7 +3,15 @@ from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
+from kivy.uix.screenmanager import ScreenManager
 
+sm = ScreenManager
+
+for i in range(4):
+	screen = Screen(name='Title %d' % i)
+	sm.add_widget(screen)
+
+	
 class LoginScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(LoginScreen, self).__init__(**kwargs)
