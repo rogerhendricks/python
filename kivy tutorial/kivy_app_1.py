@@ -1,43 +1,86 @@
+#! /usr/local/bin/python3/
+
 from kivy.app import App
 
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.screenmanager import ScreenManager
+from kivy.uix.button import Button
+from kivy.uix.ScreenManager import ScreenManager, Screen
+import os
 
-sm = ScreenManager
+class MainPage(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.cols = 2
+        
+        if os.path.isfile("prev_details.txt"):
+            with open("prev_details.txt", "r") as f:
+                d = f.read().split(",")
+                prev_ip = d[0]
+                prev_port = d[1]
+                prev_username = d[2]
+        else:
+            prev_ip = ""
+            prev_port = ""
+            prev_username = ""
+            
+        
+        self.add_widget(Label(text='IP:'))
+        self.ip = TextInput(text = prev_ip, multiline=False)
+        self.add_widget(self.ip)
+        
+        self.add_widget(Label(text='Port:'))
+        self.port = TextInput(text = prev_port, multiline=False)
+        self.add_widget(self.port)
+        
+        self.add_widget(Label(text='Username:'))
+        self.username = TextInput(text = prev_username, multiline=False)
+        self.add_widget(self.username)
+        
+        self.join = Button(text = 'join')
+        self.join.bind(on_press = self.join_button)
+        self.add_widget(Label())
+        self.add_widget(self.join)
+        
+    
+    def join_button(self, instance):
+        port = self.port.text
+        ip = self.ip.text
+        username = self.username.text
+        
+        print(f"Attempting to join {ip}:{port} as {username}")
+        
+        with open("prev_details.txt", "w") as f:
+            f.write(f"{ip}, {port}, {username}")
+    
 
-for i in range(4):
-	screen = Screen(name='Title %d' % i)
-	sm.add_widget(screen)
+class InfoPage(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.cols = 1
+        self.message = Lebel(halign ="center", valign="middle", font_size=30)
+        self.message.bind(width=self.update_text_width)
+        self.add_widget(self.message)
 
-	
-class LoginScreen(GridLayout):
-	def __init__(self, **kwargs):
-		super(LoginScreen, self).__init__(**kwargs)
-		#add two colums to the window
-		self.cols = 2
-		
-		
-		# added a label widget
-		self.add_widget(Label(text="Username"))
-		#create a text input
-		self.username = TextInput(multiline=False)
-		# show the widget
-		self.add_widget(self.username)
-		
-		
-		# add a label widget
-		self.add_widget(Label(text="Password"))
-		# crete a text unput
-		self.password = TextInput(password=True, multiline=False)
-		# display the widget
-		self.add_widget(self.password)
+    def
 
 
 class KivyApp(App):
 	def build(self):
-		return LoginScreen()
+		self.screen_manager = ScreenManager()
+        self.main_page = MainPage()
+        screen = Screen(name="Main")
+        screen.add_widget(self.main_page)
+        self.screen_manager.add_widget(screen)
+
+        self.info_page = InfoPage()
+        screen = Screen(name="Info")
+        screen.add_widget(self.info_page)
+        self.screen_manager.add_widget(screen)
+
+        return self.screen_manager
 
 if __name__ == '__main__':
 	KivyApp().run()
